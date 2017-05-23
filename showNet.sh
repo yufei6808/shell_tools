@@ -22,7 +22,7 @@ elif [[ $RX -gt 1048576 ]];then
 	RX=$(echo $RX | awk '{print $1/1048576 "MB/s"}')
 else
 	RX=$(echo $RX | awk '{print $1/1024 "KB/s"}')
-fi
+fi 
 if [[ $TX -lt 1024 ]];then
  	TX="${TX}B/s"
 elif [[ $TX -gt 1048576 ]];then
@@ -30,6 +30,6 @@ elif [[ $TX -gt 1048576 ]];then
 else
  	TX=$(echo $TX | awk '{print $1/1024 "KB/s"}')
 fi
-  
+   
 echo -e "$eth \t $RX   $TX "
 done
