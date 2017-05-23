@@ -44,3 +44,21 @@ while [ true ]
                fi
 done
 
+
+#!/bin/bash
+#
+#网络质量监控
+#
+DATE=$(date -d today +"%Y-%m-%d %H:%M:%S")
+
+ping -c 5 114.114.114.114 | awk '{print$7}' > /tmp/ping.log
+cat /tmp/ping.log | grep time | awk -F= '{print$2}'> /tmp/time.log
+
+while read line
+do
+    if [ $(echo "$line > 100" | bc) = 1 ]
+        then
+        echo "ping 114.114.114.114" "time="$line $DATE >> /data/logs/ping.log
+    fi
+
+done < '/tmp/time.log';
